@@ -10,7 +10,14 @@
 </head>
 
 <body>
-  <h1>Home</h1>
+<h1><%= name %></h1>
+  <% like.forEach((each) => { %>
+    <script>
+      console.log('<%= each %>');
+    </script>
+    <p><%= each %></p> 
+  <% }); %>
+  <%- include('../partials/footer/footer.ejs', {name: name}); %>
 </body>
 <script src="/views/home/home.js"></script>
 </html>
