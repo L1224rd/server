@@ -5,6 +5,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const multer = require('multer');
 const { exec } = require('child_process');
+const fs = require('fs');
 
 // ==================== INTERNAL IMPORTS ==================== //
 
@@ -68,6 +69,14 @@ app.post('/upload', upload.single('myfile'), (req, res) => {
 
 app.get('/download/:file', (req, res) => {
   res.sendFile(path.join(__dirname, `/home/server/server/uploads/${req.params.file}`));
+});
+
+app.get('/favicon.ico', (req, res) => {
+  res.sendFile(path.join(__dirname, 'favicon.ico'));
+});
+
+app.get('/getsize/:file', (req, res) => {
+  res.send(fs.statSync(path.join(__dirname, 'uploads', req.params.file)).size + '');
 });
 
 // ==================== START SERVER ==================== //
