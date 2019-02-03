@@ -58,7 +58,7 @@ const getViewPath = view => path.join(__dirname, `views/${view}/${view}.ejs`);
 // ==================== RENDER VIEWS ==================== //
 
 app.get('/', (req, res) => {
-  exec('ls ./uploads', (err, out) => {
+  exec(`ls ${path.join(__dirname, 'uploads')}`, (err, out) => {
     res.render(getViewPath('home'), { files: out.split('\n') });
   });
 });
