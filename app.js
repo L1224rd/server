@@ -4,6 +4,7 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const multer = require('multer');
+const { exec } = require('child_process');
 
 // ==================== INTERNAL IMPORTS ==================== //
 
@@ -18,7 +19,7 @@ const storage = multer.diskStorage({
   },
   filename: (req, file, cb) => {
     // error first callback
-    cb(null, file.originalname)
+    cb(null, file.originalname);
   }
 });
 
@@ -71,7 +72,13 @@ app.post('/upload', upload.single('myfile'), (req, res) => {
 });
 
 app.get('/download', (req, res) => {
-  res.sendFile(req.query.file);
+  exec('ls ./uploads', (err, out) => {
+    res.render(getViewPath('download'), { files: out.split('\n') });
+  });
+});
+
+app.get('/getfile/:file', (req, res) => {
+  res.sendFile(path.join(__dirname, `uploads/${req.params.file}`));
 });
 
 // ==================== START SERVER ==================== //
