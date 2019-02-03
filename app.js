@@ -13,9 +13,8 @@ const app = express();
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    console.log(file);
     // error first callback
-    cb(null, './uploads/');
+    cb(null, 'uploads/');
   },
   filename: (req, file, cb) => {
     // error first callback
