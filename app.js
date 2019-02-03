@@ -57,27 +57,16 @@ const getViewPath = view => path.join(__dirname, `views/${view}/${view}.ejs`);
 // ==================== RENDER VIEWS ==================== //
 
 app.get('/', (req, res) => {
-  res.render(getViewPath('home'), {
-    name: 'Server',
-    like: ['a', 'b', 'c']
+  exec('ls ./uploads', (err, out) => {
+    res.render(getViewPath('home'), { files: out.split('\n') });
   });
-});
-
-app.get('/upload', (req, res) => {
-  res.render(getViewPath('upload'));
 });
 
 app.post('/upload', upload.single('myfile'), (req, res) => {
-  res.redirect('/upload');
+  res.redirect('/');
 });
 
-app.get('/download', (req, res) => {
-  exec('ls ./uploads', (err, out) => {
-    res.render(getViewPath('download'), { files: out.split('\n') });
-  });
-});
-
-app.get('/getfile/:file', (req, res) => {
+app.get('/download/:file', (req, res) => {
   res.sendFile(path.join(__dirname, `uploads/${req.params.file}`));
 });
 

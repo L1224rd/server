@@ -1,23 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="/views/home/home.css">
-  <title>Home</title>
-</head>
-
-<body>
-<h1><%= name %></h1>
-  <% like.forEach((each) => { %>
-    <script>
-      console.log('<%= each %>');
-    </script>
-    <p><%= each %></p> 
-  <% }); %>
-  <%- include('../partials/footer/footer.ejs', {name: name}); %>
-</body>
-<script src="/views/home/home.js"></script>
+  <head>
+    <title>Download</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/style.css" rel="stylesheet">
+  </head>
+  <form method="POST" enctype="multipart/form-data" action="/upload">
+    <input type="file" name="myfile">
+    <input type="submit" name="" value="Send">  
+  </form>
+  <hr>
+  <body>
+    <% files.forEach((file) => { %>
+      <p><a href="/download/<%= file %>"><%= file %></a></p>
+    <% }); %>
+  </body>
 </html>
