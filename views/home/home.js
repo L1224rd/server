@@ -21,7 +21,8 @@ gel.get = (url, callback) => {
   http.send();
 };
 
-gel('#form-upload').addEventListener('submit', () => {
+gel('input[name=myfile]').addEventListener('change', () => {
+  gel('#form-upload').submit();
   const file = gel('input[name=myfile]').files[0];
   setInterval(() => {
     gel.get(`/getsize/${file.name}`, (res) => {
