@@ -67,7 +67,7 @@ app.post('/upload', upload.single('myfile'), (req, res) => {
 });
 
 app.get('/download/:file', (req, res) => {
-  res.sendFile(path.join(__dirname, `uploads/${req.params.file}`));
+  res.sendFile(path.join(__dirname, `/home/server/server/uploads/${req.params.file}`));
 });
 
 // ==================== START SERVER ==================== //
