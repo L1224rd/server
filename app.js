@@ -68,15 +68,27 @@ app.post('/upload', upload.single('myfile'), (req, res) => {
 });
 
 app.get('/download/:file', (req, res) => {
-  res.sendFile(path.join(__dirname, `uploads/${req.params.file}`));
+  try {
+    res.sendFile(path.join(__dirname, `uploads/${req.params.file}`));
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 app.get('/favicon.ico', (req, res) => {
-  res.sendFile(path.join(__dirname, 'favicon.ico'));
+  try {
+    res.sendFile(path.join(__dirname, 'favicon.ico'));
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 app.get('/getsize/:file', (req, res) => {
-  res.send(fs.statSync(path.join(__dirname, 'uploads', req.params.file)).size + '');
+  try {
+    res.send(fs.statSync(path.join(__dirname, 'uploads', req.params.file)).size + '');
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 // ==================== START SERVER ==================== //
